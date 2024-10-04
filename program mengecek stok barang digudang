@@ -1,0 +1,44 @@
+# stock_checker.py
+
+class Item:
+    def __init__(self, name, quantity):
+        self.name = name
+        self.quantity = quantity
+
+class Warehouse:
+    def __init__(self):
+        self.stock = []
+
+    def add_item(self, item):
+        self.stock.append(item)
+
+    def check_stock(self, item_name):
+        for item in self.stock:
+            if item.name.lower() == item_name.lower():
+                return item.quantity
+        return 0
+
+def main():
+    warehouse = Warehouse()
+
+    # Menambahkan beberapa item ke gudang
+    warehouse.add_item(Item("oli", 150))
+    warehouse.add_item(Item("baut", 50))
+    warehouse.add_item(Item("minyak rem", 100))
+
+    while True:
+        print("\nPengecekan Stok Barang di Gudang")
+        item_name = input("Masukkan nama barang untuk dicek: ")
+
+        stock_quantity = warehouse.check_stock(item_name)
+        if stock_quantity > 0:
+            print(f"Stok {item_name}: {stock_quantity} unit.")
+        else:
+            print(f"{item_name} tidak tersedia di gudang.")
+
+        next_check = input("Ingin mengecek barang lain? (ya/tidak): ")
+        if next_check.lower() != 'ya':
+            break
+
+if __name__ == "__main__":
+    main()
